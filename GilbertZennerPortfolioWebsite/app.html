@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gilbert Zenner - Full Stack Web Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000; /* Black background */
+        color: #fff;
+      }
+      header {
+        background: linear-gradient(
+          135deg,
+          #ff7e5f,
+          #feb47b
+        ); /* Gradient background */
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        position: relative;
+        z-index: 1;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow */
+      }
+      nav {
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          #43cea2,
+          #185a9d
+        ); /* Gradient background */
+        padding: 0.5rem 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        position: relative;
+        z-index: 1;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 1rem;
+        font-weight: bold;
+        transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+      }
+      nav a:hover {
+        color: #ffeb3b; /* Yellow on hover */
+        text-decoration: underline;
+        transform: scale(1.1); /* Slightly enlarge on hover */
+      }
+      .matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+        z-index: 0;
+        overflow: hidden;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+      .hero,
+      .projects,
+      .contact {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+        background: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* White background with opacity */
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        margin-bottom: 2rem;
+      }
+      .hero {
+        background: url("https://via.placeholder.com/800x400") no-repeat center
+          center/cover; /* Hero background image */
+        color: #000; /* Change text color to black for better readability */
+        background-color: rgba(255, 255, 255, 0.8); /* Add a white background with opacity */
+      }
+      .hero h2 {
+        margin-top: 0;
+      }
+      .project-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .project {
+        margin: 1rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9); /* Slightly opaque background */
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: transform 0.3s ease; /* Smooth transition */
+      }
+      .project:hover {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      form input,
+      form textarea,
+      form button {
+        width: 100%;
+        max-width: 400px;
+        margin: 0.5rem 0;
+      }
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background: #333;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+      }
+      .social-links {
+        margin-top: 1rem;
+      }
+      .social-links a {
+        color: #fff;
+        margin: 0 0.5rem;
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: color 0.3s ease; /* Smooth transition */
+      }
+      .social-links a:hover {
+        color: #ffeb3b; /* Yellow on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Gilbert Zenner</h1>
+      <p>Full Stack Web Developer</p>
+    </header>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="matrix"></div>
+    <div class="container">
+      <section id="about" class="hero">
+        <img src="https://via.placeholder.com/150" alt="Gilbert Zenner" />
+        <h2>About Me</h2>
+        <p>
+          Hi, I'm Gilbert Zenner, a passionate Full Stack Web Developer with a
+          knack for creating stunning and efficient web applications. With a
+          strong background in both front-end and back-end technologies, I
+          strive to deliver top-notch solutions that exceed client expectations.
+        </p>
+      </section>
+      <section id="projects" class="projects">
+        <h2>Projects</h2>
+        <div class="project-list">
+          <div class="project">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Personal Budget Tracker"
+            />
+            <h3>Personal Budget Tracker</h3>
+            <p>
+              A web application that helps users track their income, expenses,
+              and savings. Features include adding transactions, categorizing
+              expenses, and visualizing data with charts.
+            </p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Recipe Sharing Platform"
+            />
+            <h3>Recipe Sharing Platform</h3>
+            <p>
+              A platform where users can share their favorite recipes, rate and
+              comment on others' recipes, and save recipes to their personal
+              collections.
+            </p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Task Management App"
+            />
+            <h3>Task Management App</h3>
+            <p>
+              A simple yet effective task management tool that allows users to
+              create, edit, and delete tasks. Features include setting due
+              dates, prioritizing tasks, and marking tasks as complete.
+            </p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Weather Dashboard"
+            />
+            <h3>Weather Dashboard</h3>
+            <p>
+              A web application that provides real-time weather information for
+              multiple cities. Features include searching for cities, displaying
+              current weather conditions, and showing a 5-day forecast.
+            </p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project">
+            <img src="https://via.placeholder.com/300" alt="Online Portfolio" />
+            <h3>Online Portfolio</h3>
+            <p>
+              A personal portfolio website to showcase your projects, skills,
+              and experience. Includes sections for about, projects, blog, and
+              contact.
+            </p>
+            <a href="#" target="_blank">View Project</a>
+          </div>
+        </div>
+      </section>
+      <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <form>
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
+    </div>
+    <footer>
+      <p>&copy; 2023 Gilbert Zenner. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+      </div>
+    </footer>
+    <script>
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          alert("Message sent!");
+        });
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      document.querySelector(".matrix").appendChild(canvas);
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const letters = Array(256).join(1).split("");
+      const fontSize = 16;
+      const columns = canvas.width / fontSize;
+
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0F0";
+        ctx.font = `${fontSize}px monospace`;
+
+        letters.forEach((y, index) => {
+          const text = String.fromCharCode(
+            Math.random() < 0.5
+              ? 65 + Math.random() * 26
+              : 97 + Math.random() * 26
+          );
+          const x = index * fontSize;
+          ctx.fillText(text, x, y);
+          letters[index] =
+            y > canvas.height + Math.random() * 1e4 ? 0 : y + fontSize;
+        });
+      }
+
+      setInterval(draw, 33);
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>
