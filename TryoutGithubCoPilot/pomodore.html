@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #1e1e2f, #3a3a5f);
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            width: 400px;
+            background: rgba(46, 46, 66, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        #timer {
+            font-size: 72px;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.4);
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 65, 108, 0.6);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Pomodoro Timer</h1>
+    <div id="timer">25:00</div>
+    <div>
+        <button class="button" id="startButton">Start</button>
+        <button class="button" id="resetButton">Reset</button>
+    </div>
+</div>
+
+<script>
+    let timer;
+    let timeLeft = localStorage.getItem('timeLeft') ? parseInt(localStorage.getItem('timeLeft')) : 25 * 60;
+    let isRunning = localStorage.getItem('isRunning') === 'true';
+    let startTime = localStorage.getItem('startTime') ? parseInt(localStorage.getItem('startTime')) : null;
+
+    const timerElement = document.getElementById('timer');
+    const startButton = document.getElementById('startButton');
+    const resetButton = document.getElementById('resetButton');
+
+    function updateTimerDisplay() {
+        const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+        const seconds = String(timeLeft % 60).padStart(2, '0');
+        timerElement.textContent = `${minutes}:${seconds}`;
+    }
+
+    function calculateTimeLeft() {
+        if (isRunning && startTime) {
+            const currentTime = Math.floor(Date.now() / 1000);
+            const elapsedTime = currentTime - startTime;
+            timeLeft = Math.max(0, timeLeft - elapsedTime);
+            if (timeLeft === 0) {
+                clearInterval(timer);
+                isRunning = false;
+                localStorage.setItem('isRunning', 'false');
+                startButton.textContent = 'Start';
+                alert("Time's up! Take a break!");
+            }
+        }
+    }
+
+    function startTimer() {
+        if (!isRunning) {
+            isRunning = true;
+            startTime = Math.floor(Date.now() / 1000);
+            localStorage.setItem('startTime', startTime);
+            startButton.textContent = 'Pause';
+            localStorage.setItem('isRunning', 'true');
+            timer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    localStorage.setItem('timeLeft', timeLeft);
+                } else {
+                    clearInterval(timer);
+                    isRunning = false;
+                    localStorage.setItem('isRunning', 'false');
+                    startButton.textContent = 'Start';
+                    alert("Time's up! Take a break!");
+                }
+            }, 1000);
+        } else {
+            clearInterval(timer);
+            isRunning = false;
+            startButton.textContent = 'Start';
+            localStorage.setItem('isRunning', 'false');
+        }
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timeLeft = 25 * 60;
+        isRunning = false;
+        updateTimerDisplay();
+        localStorage.setItem('timeLeft', timeLeft);
+        localStorage.setItem('isRunning', 'false');
+        localStorage.removeItem('startTime');
+        startButton.textContent = 'Start';
+    }
+
+    startButton.addEventListener('click', startTimer);
+    resetButton.addEventListener('click', resetTimer);
+
+    calculateTimeLeft();
+    updateTimerDisplay();
+
+    // If the timer was running before the page reload, continue running it
+    if (isRunning) {
+        startTimer();
+    }
+</script>
+</body>
+</html>
