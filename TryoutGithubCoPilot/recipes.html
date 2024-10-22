@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffecd2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6347;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ff6347;
+            border-radius: 25px;
+            font-size: 1.2em;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #ffa07a;
+        }
+
+        .recipe-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recipe-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ff6347;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            background: #fff5e1;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .recipe-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .recipe-item h3 {
+            margin: 0 0 10px;
+            color: #ff4500;
+        }
+
+        .recipe-item p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .ingredients {
+            background-color: #ffefc1;
+            padding: 10px;
+            border-radius: 10px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍲 Recipe Book</h1>
+        <input type="text" id="searchInput" placeholder="Search for a recipe..." onkeyup="searchRecipes()">
+        <ul id="recipeList" class="recipe-list">
+            <!-- Recipes will be dynamically injected here by JavaScript -->
+        </ul>
+    </div>
+
+    <script>
+        const recipes = [
+            {
+                name: "Spaghetti Carbonara",
+                ingredients: ["spaghetti", "egg", "pancetta", "parmesan", "pepper"],
+                instructions: "Cook the spaghetti. Mix eggs and cheese. Fry pancetta. Combine everything and season with pepper."
+            },
+            {
+                name: "Chicken Curry",
+                ingredients: ["chicken", "curry powder", "coconut milk", "onion", "garlic"],
+                instructions: "Sauté onion and garlic. Add chicken and cook until browned. Stir in curry powder and coconut milk. Simmer until cooked."
+            },
+            {
+                name: "Pancakes",
+                ingredients: ["flour", "milk", "egg", "baking powder", "sugar"],
+                instructions: "Mix all ingredients into a batter. Heat a skillet and pour batter. Cook until golden brown on both sides."
+            },
+            {
+                name: "Caesar Salad",
+                ingredients: ["romaine lettuce", "croutons", "parmesan", "caesar dressing"],
+                instructions: "Chop lettuce, add croutons, parmesan, and drizzle with Caesar dressing. Toss to combine."
+            },
+            {
+                name: "Guacamole",
+                ingredients: ["avocado", "lime", "salt", "onion", "tomato"],
+                instructions: "Mash avocado, mix with lime juice, salt, chopped onion, and tomato. Serve fresh."
+            }
+        ];
+
+        function displayRecipes(recipesToDisplay) {
+            const recipeList = document.getElementById("recipeList");
+            recipeList.innerHTML = "";
+
+            recipesToDisplay.forEach(recipe => {
+                const recipeItem = document.createElement("li");
+                recipeItem.className = "recipe-item";
+
+                const recipeName = document.createElement("h3");
+                recipeName.textContent = recipe.name;
+                recipeItem.appendChild(recipeName);
+
+                const recipeIngredients = document.createElement("p");
+                recipeIngredients.className = "ingredients";
+                recipeIngredients.textContent = `Ingredients: ${recipe.ingredients.join(", ")}`;
+                recipeItem.appendChild(recipeIngredients);
+
+                const recipeInstructions = document.createElement("p");
+                recipeInstructions.textContent = `Instructions: ${recipe.instructions}`;
+                recipeItem.appendChild(recipeInstructions);
+
+                recipeList.appendChild(recipeItem);
+            });
+        }
+
+        function searchRecipes() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const filteredRecipes = recipes.filter(recipe => {
+                return recipe.name.toLowerCase().includes(searchInput) ||
+                    recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(searchInput));
+            });
+            displayRecipes(filteredRecipes);
+        }
+
+        // Display all recipes initially
+        window.onload = () => {
+            displayRecipes(recipes);
+        };
+    </script>
+</body>
+</html>
