@@ -4,13 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cool Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
         margin: 0;
-        font-family: "Courier New", monospace;
-        background: black;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #42a5f5, #ffcc33, #ff6f61);
         color: white;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
       }
 
       .matrix {
@@ -27,40 +37,48 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.8);
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        background: rgba(255, 255, 255, 0.2);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 400px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .calculator:hover {
+        transform: scale(1.05);
       }
 
       .calculator input {
         width: 90%;
-        padding: 15px;
-        margin-bottom: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
         border: none;
-        border-radius: 5px;
+        border-radius: 10px;
         font-size: 2em;
-        background-color: black;
-        color: #00ff00;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #333;
         text-align: right;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
       }
 
       .calculator button {
         width: 22%;
         padding: 15px;
-        margin: 5px;
+        margin: 10px;
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         font-size: 1.5em;
-        background: #00ff00;
-        color: black;
+        background: linear-gradient(135deg, #ffcc33, #42a5f5);
+        color: #fff;
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: background 0.3s ease, transform 0.3s;
       }
 
       .calculator button:hover {
-        background: #00cc00;
+        background: linear-gradient(135deg, #ffa726, #1e88e5);
+        transform: translateY(-3px);
       }
 
       .button-row {
@@ -173,8 +191,7 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      const matrixCharacters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+      const matrixCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
       const fontSize = 16;
       const columns = canvas.width / fontSize;
       const drops = Array.from({ length: columns }).fill(0); // Track the Y position of characters
@@ -183,14 +200,11 @@
         ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // Clear screen with slight opacity to leave trails
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = "#00FF00"; // Green characters
+        ctx.fillStyle = "#ffcc33"; // Yellowish characters
         ctx.font = `${fontSize}px monospace`;
 
         for (let i = 0; i < drops.length; i++) {
-          const text =
-            matrixCharacters[
-              Math.floor(Math.random() * matrixCharacters.length)
-            ];
+          const text = matrixCharacters[Math.floor(Math.random() * matrixCharacters.length)];
           ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
           // Random reset the drop back to the top

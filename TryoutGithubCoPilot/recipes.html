@@ -4,43 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Book</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ffecd2;
-            color: #333;
+            background: linear-gradient(135deg, #ff9f1c, #ff4040, #4ecdc4);
+            color: #fff;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 800px;
             margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px) saturate(200%);
+            -webkit-backdrop-filter: blur(15px) saturate(200%);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.03);
         }
 
         h1 {
             text-align: center;
-            color: #ff6347;
+            color: #fffae6;
             font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
         }
 
         input[type="text"] {
             width: 100%;
             padding: 15px;
             margin-bottom: 20px;
-            border: 2px solid #ff6347;
+            border: 2px solid #ff4040;
             border-radius: 25px;
             font-size: 1.2em;
             outline: none;
-            transition: border-color 0.3s;
+            background: rgba(255, 255, 255, 0.6);
+            color: #333;
+            transition: border-color 0.3s, transform 0.3s;
         }
 
         input[type="text"]:focus {
-            border-color: #ffa07a;
+            border-color: #ff9f1c;
+            transform: scale(1.05);
         }
 
         .recipe-list {
@@ -51,33 +74,35 @@
         .recipe-item {
             padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid #ff6347;
+            border: 1px solid #ff4040;
             border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-            background: #fff5e1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .recipe-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
         }
 
         .recipe-item h3 {
             margin: 0 0 10px;
-            color: #ff4500;
+            color: #ffe066;
         }
 
         .recipe-item p {
             margin: 5px 0;
-            font-size: 0.95em;
+            font-size: 1em;
+            color: #fff;
         }
 
         .ingredients {
-            background-color: #ffefc1;
+            background-color: rgba(255, 239, 193, 0.7);
             padding: 10px;
             border-radius: 10px;
             font-style: italic;
+            color: #333;
             margin-bottom: 10px;
         }
     </style>

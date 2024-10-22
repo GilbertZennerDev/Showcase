@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
         body, html {
             margin: 0;
@@ -11,9 +17,14 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
+            background: linear-gradient(to right, #ff7e5f, #feb47b, #86a8e7, #7f7fd5);
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 5vh;
+            box-sizing: border-box;
         }
         .clouds {
             position: absolute;
@@ -25,43 +36,43 @@
         .cloud {
             position: absolute;
             background: url('https://www.transparenttextures.com/patterns/clouds.png') repeat;
-            opacity: 0.8;
-            animation: moveClouds 60s linear infinite;
+            opacity: 0.5;
+            animation: moveClouds 30s linear infinite;
         }
         .cloud:nth-child(1) {
             top: 0;
             left: 0;
-            width: 200%;
-            height: 200%;
-            animation-duration: 60s;
+            width: 150%;
+            height: 150%;
+            animation-duration: 40s;
         }
         .cloud:nth-child(2) {
             top: 0;
             left: 0;
-            width: 300%;
-            height: 300%;
-            animation-duration: 120s;
+            width: 200%;
+            height: 200%;
+            animation-duration: 80s;
         }
         .cloud:nth-child(3) {
             top: 0;
             left: 0;
-            width: 400%;
-            height: 400%;
-            animation-duration: 180s;
+            width: 250%;
+            height: 250%;
+            animation-duration: 120s;
         }
         .cloud:nth-child(4) {
             top: 0;
             left: 0;
-            width: 500%;
-            height: 500%;
-            animation-duration: 240s;
+            width: 300%;
+            height: 300%;
+            animation-duration: 160s;
         }
         .cloud:nth-child(5) {
             top: 0;
             left: 0;
-            width: 600%;
-            height: 600%;
-            animation-duration: 300s;
+            width: 350%;
+            height: 350%;
+            animation-duration: 200s;
         }
         @keyframes moveClouds {
             0% { transform: translateX(0); }
@@ -71,30 +82,40 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            padding: 20px;
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translate(-50%, 0);
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 25px;
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+        .weather-container:hover {
+            transform: scale(1.02);
         }
         .weather-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            padding: 25px;
+            border-radius: 20px;
             text-align: center;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            color: #fff;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+        }
+        .weather-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
         }
         .weather-card h2 {
             margin: 0;
-            font-size: 1.5em;
-            padding-top: 10px;
+            font-size: 2em;
+            padding-top: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
         }
         .weather-card p {
-            margin: 10px 0;
-            font-size: 1em;
+            margin: 15px 0;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -147,13 +168,13 @@
                 temperatureElement.textContent = `Temperature: ${temperature}°C`;
 
                 if (temperature <= 0) {
-                    card.style.background = 'rgba(0, 0, 255, 0.1)'; // Cold (blue)
+                    card.style.background = 'rgba(0, 0, 255, 0.4)'; // Cold (blue)
                 } else if (temperature <= 15) {
-                    card.style.background = 'rgba(0, 255, 255, 0.1)'; // Cool (cyan)
+                    card.style.background = 'rgba(0, 255, 255, 0.4)'; // Cool (cyan)
                 } else if (temperature <= 25) {
-                    card.style.background = 'rgba(255, 255, 0, 0.1)'; // Warm (yellow)
+                    card.style.background = 'rgba(255, 255, 0, 0.4)'; // Warm (yellow)
                 } else {
-                    card.style.background = 'rgba(255, 0, 0, 0.1)'; // Hot (red)
+                    card.style.background = 'rgba(255, 0, 0, 0.4)'; // Hot (red)
                 }
 
                 weatherContainer.appendChild(card);
