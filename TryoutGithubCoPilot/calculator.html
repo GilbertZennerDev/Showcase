@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cool Calculator</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Courier New", monospace;
+        background: black;
+        color: white;
+        overflow: hidden;
+      }
+
+      .matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .calculator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+      }
+
+      .calculator input {
+        width: 90%;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 2em;
+        background-color: black;
+        color: #00ff00;
+        text-align: right;
+      }
+
+      .calculator button {
+        width: 22%;
+        padding: 15px;
+        margin: 5px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.5em;
+        background: #00ff00;
+        color: black;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .calculator button:hover {
+        background: #00cc00;
+      }
+
+      .button-row {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      @media screen and (max-width: 600px) {
+        .calculator input,
+        .calculator button {
+          font-size: 1.2em;
+          padding: 10px;
+        }
+
+        .calculator button {
+          width: 25%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas class="matrix"></canvas>
+
+    <div class="calculator">
+      <input type="text" id="display" disabled />
+      <div class="button-row">
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="setOperation('+')">+</button>
+      </div>
+      <div class="button-row">
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="setOperation('-')">-</button>
+      </div>
+      <div class="button-row">
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="setOperation('*')">*</button>
+      </div>
+      <div class="button-row">
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="setOperation('/')">/</button>
+      </div>
+    </div>
+
+    <script>
+      let display = document.getElementById("display");
+      let currentOperation = null;
+      let firstOperand = null;
+
+      function appendNumber(number) {
+        display.value += number;
+      }
+
+      function setOperation(operation) {
+        if (display.value !== "") {
+          firstOperand = parseFloat(display.value);
+          currentOperation = operation;
+          display.value = "";
+        }
+      }
+
+      function calculate() {
+        let secondOperand = parseFloat(display.value);
+        if (
+          currentOperation &&
+          firstOperand !== null &&
+          !isNaN(secondOperand)
+        ) {
+          switch (currentOperation) {
+            case "+":
+              display.value = firstOperand + secondOperand;
+              break;
+            case "-":
+              display.value = firstOperand - secondOperand;
+              break;
+            case "*":
+              display.value = firstOperand * secondOperand;
+              break;
+            case "/":
+              if (secondOperand === 0) {
+                display.value = "Error";
+              } else {
+                display.value = firstOperand / secondOperand;
+              }
+              break;
+          }
+          currentOperation = null;
+          firstOperand = null;
+        } else {
+          display.value = "Error";
+        }
+      }
+
+      function clearDisplay() {
+        display.value = "";
+        currentOperation = null;
+      }
+
+      // Matrix effect
+      const canvas = document.querySelector(".matrix");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const matrixCharacters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+      const fontSize = 16;
+      const columns = canvas.width / fontSize;
+      const drops = Array.from({ length: columns }).fill(0); // Track the Y position of characters
+
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // Clear screen with slight opacity to leave trails
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#00FF00"; // Green characters
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+          const text =
+            matrixCharacters[
+              Math.floor(Math.random() * matrixCharacters.length)
+            ];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          // Random reset the drop back to the top
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
+            drops[i] = 0;
+          }
+
+          drops[i]++;
+        }
+      }
+
+      setInterval(drawMatrix, 33);
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>
