@@ -1,0 +1,209 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+#backdrop {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(
+    to top,
+    rgb(65, 55, 26) 0%,
+    rgb(245, 187, 101) 100%
+  );
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#card-wrapper {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 800px;
+  height: 700px;
+}
+
+.card {
+  color: #000;
+  margin: 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #ff8177, #b2fefa);
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px #000;
+}
+
+.card:hover {
+  background-color: #ff33cc;
+  transform: scale(1.05);
+  transition: all 0.2s;
+}
+
+.card__btn {
+  width: 100px;
+  height: 50px;
+  background: linear-gradient(to top, #a81400, #b49900);
+  /*-webkit-background-clip: text;*/
+  /*background-clip: text;*/
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card__btn:hover {
+  transform: scale(1.05);
+  transition: all 0.2s;
+}
+
+#test {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  background: linear-gradient(to right, #ff8177, #b2fefa);
+  z-index: 999;
+}
