@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .cloud {
+            position: absolute;
+            background: url('https://www.transparenttextures.com/patterns/clouds.png') repeat;
+            opacity: 0.8;
+            animation: moveClouds 60s linear infinite;
+        }
+        .cloud:nth-child(1) {
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            animation-duration: 60s;
+        }
+        .cloud:nth-child(2) {
+            top: 0;
+            left: 0;
+            width: 300%;
+            height: 300%;
+            animation-duration: 120s;
+        }
+        .cloud:nth-child(3) {
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 400%;
+            animation-duration: 180s;
+        }
+        .cloud:nth-child(4) {
+            top: 0;
+            left: 0;
+            width: 500%;
+            height: 500%;
+            animation-duration: 240s;
+        }
+        .cloud:nth-child(5) {
+            top: 0;
+            left: 0;
+            width: 600%;
+            height: 600%;
+            animation-duration: 300s;
+        }
+        @keyframes moveClouds {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .weather-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .weather-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .weather-card h2 {
+            margin: 0;
+            font-size: 1.5em;
+            padding-top: 10px;
+        }
+        .weather-card p {
+            margin: 10px 0;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+    <div class="weather-container" id="weather-container">
+        <!-- Weather cards will be generated here -->
+    </div>
+    <script>
+        const cities = [
+            "New York", "London", "Paris", "Tokyo", "Sydney", "Moscow", "Berlin", "Madrid", "Rome", "Beijing",
+            "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin"
+        ];
+
+        function getRandomTemperature() {
+            return Math.floor(Math.random() * 41) - 10; // Random temperature between -10 and 30
+        }
+
+        function createWeatherCard(city) {
+            const card = document.createElement('div');
+            card.className = 'weather-card';
+
+            const cityElement = document.createElement('h2');
+            cityElement.textContent = city;
+            card.appendChild(cityElement);
+
+            const temperatureElement = document.createElement('p');
+            temperatureElement.className = 'temperature';
+            card.appendChild(temperatureElement);
+
+            const descriptionElement = document.createElement('p');
+            descriptionElement.textContent = 'Description: Clear sky';
+            card.appendChild(descriptionElement);
+
+            return card;
+        }
+
+        function updateWeatherCards() {
+            const weatherContainer = document.getElementById('weather-container');
+            cities.forEach(city => {
+                const card = createWeatherCard(city);
+                const temperature = getRandomTemperature();
+                const temperatureElement = card.querySelector('.temperature');
+                temperatureElement.textContent = `Temperature: ${temperature}°C`;
+
+                if (temperature <= 0) {
+                    card.style.background = 'rgba(0, 0, 255, 0.1)'; // Cold (blue)
+                } else if (temperature <= 15) {
+                    card.style.background = 'rgba(0, 255, 255, 0.1)'; // Cool (cyan)
+                } else if (temperature <= 25) {
+                    card.style.background = 'rgba(255, 255, 0, 0.1)'; // Warm (yellow)
+                } else {
+                    card.style.background = 'rgba(255, 0, 0, 0.1)'; // Hot (red)
+                }
+
+                weatherContainer.appendChild(card);
+            });
+        }
+
+        updateWeatherCards();
+    </script>
+</body>
+</html>
